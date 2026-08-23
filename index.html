@@ -50,15 +50,23 @@
     position:relative;
   }
   .back-btn{
-    background:none;
-    border:none;
-    font-size:1.6rem;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    width:36px;
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.5rem;
     color:var(--ink);
     cursor:pointer;
-    padding:0 6px 0 0;
+    padding:0;
     line-height:1;
     flex-shrink:0;
+    box-shadow:0 1px 2px rgba(0,0,0,0.06);
   }
+  .back-btn:active{ background:var(--teal-soft); border-color:var(--teal); }
   .topbar h1{
     font-family:'Fraunces',serif;
     font-weight:600;
@@ -434,6 +442,37 @@
   }
   .service-total-card .sub b{ color:var(--gold); }
 
+  .service-year-nav{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin-top:12px;
+  }
+  .service-year-nav button{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    width:32px;
+    height:32px;
+    font-size:1.1rem;
+    color:var(--teal);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .service-year-nav button:active{ background:var(--teal-soft); }
+  .service-year-nav button:disabled{ opacity:0.35; cursor:default; }
+  .service-year-nav .current-period-btn{
+    width:auto;
+    padding:0 12px;
+    font-size:0.8rem;
+    font-weight:600;
+    color:var(--ink);
+    background:var(--card);
+  }
+
   .estudos-field{
     padding:14px 16px;
     display:flex;
@@ -470,23 +509,46 @@
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:4px;
+    gap:2px;
   }
   .day-hour-cell .dnum{
-    font-size:0.66rem;
+    font-size:0.72rem;
+    color:var(--ink);
+    font-weight:700;
+    line-height:1.1;
+  }
+  .day-hour-cell .dweek{
+    font-size:0.58rem;
     color:var(--ink-soft);
-    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    line-height:1.1;
+    margin-bottom:2px;
+  }
+  .day-hour-cell.weekend .dweek{ color:var(--gold); }
+  .day-hour-cell .input-wrap{
+    position:relative;
+    width:100%;
   }
   .day-hour-cell input{
     width:100%;
     text-align:center;
     border:1px solid var(--line);
     border-radius:8px;
-    padding:6px 2px;
+    padding:6px 16px 6px 2px;
     font-family:'Inter',monospace;
     font-size:0.8rem;
     background:var(--paper);
     color:var(--ink);
+  }
+  .day-hour-cell .unit{
+    position:absolute;
+    right:5px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:0.62rem;
+    color:var(--ink-soft);
+    pointer-events:none;
   }
   .day-hour-cell input:focus{ outline:none; border-color:var(--teal); }
   .day-hour-cell.has-value input{
@@ -494,6 +556,7 @@
     background:var(--gold-soft);
     font-weight:600;
   }
+  .day-hour-cell.has-value .unit{ color:var(--gold); }
 
   .month-report-btn{
     display:flex;
@@ -559,6 +622,42 @@
   .sw-btn.reset{ background:var(--paper); color:var(--ink-soft); border:1px solid var(--line); }
   .sw-btn.reset:active{ background:var(--line); }
   .sw-btn:disabled{ opacity:.4; cursor:default; }
+
+  .home-service-summary{
+    max-width:560px;
+    margin:16px auto 0;
+    padding:0 16px;
+  }
+  .home-service-summary .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    cursor:pointer;
+  }
+  .home-service-summary .label{
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+  .home-service-summary .period{
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  .home-service-summary .value{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:1.7rem;
+    color:var(--teal);
+    flex-shrink:0;
+  }
 
   .whatsapp-wrap{
     max-width:560px;
@@ -734,6 +833,16 @@
     </button>
   </div>
 
+  <div class="home-service-summary">
+    <button class="card" onclick="showView('servico')" style="border:1px solid var(--line);text-align:left">
+      <span>
+        <span class="label">Total do ano de serviço atual</span>
+        <div class="period" id="homeServicePeriod"></div>
+      </span>
+      <span class="value" id="homeServiceTotal">0h</span>
+    </button>
+  </div>
+
   <div class="whatsapp-wrap">
     <button class="install-btn" id="installBtn" style="margin-top:0">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M12 6v6l3 2"/></svg>
@@ -783,6 +892,11 @@
       <div class="label">Total do ano de serviço</div>
       <div class="value" id="serviceYearTotal">0h</div>
       <div class="sub" id="serviceYearLabel"></div>
+      <div class="service-year-nav">
+        <button id="serviceYearPrevBtn" onclick="changeServiceYear(-1)" aria-label="Período anterior">&#8249;</button>
+        <button class="current-period-btn" onclick="goToCurrentServiceYear()" id="serviceYearCurrentBtn">Ano atual</button>
+        <button id="serviceYearNextBtn" onclick="changeServiceYear(1)" aria-label="Próximo período">&#8250;</button>
+      </div>
     </div>
   </div>
 
@@ -1152,8 +1266,21 @@ function currentServiceYearStart(){
   return (m >= 8) ? y : y - 1;
 }
 
-function serviceMonthsList(){
-  const startYear = currentServiceYearStart();
+let selectedServiceYearStart = currentServiceYearStart();
+
+function changeServiceYear(delta){
+  selectedServiceYearStart += delta;
+  openMonth = null;
+  renderServico();
+}
+
+function goToCurrentServiceYear(){
+  selectedServiceYearStart = currentServiceYearStart();
+  openMonth = null;
+  renderServico();
+}
+
+function serviceMonthsList(startYear = selectedServiceYearStart){
   const months = [];
   for(let i = 0; i < 12; i++){
     const monthIndex = (8 + i) % 12;
@@ -1179,8 +1306,8 @@ function monthTotalHours(key){
   return Object.values(m.days).reduce((s, h) => s + (parseFloat(h) || 0), 0);
 }
 
-function yearTotalHours(){
-  return serviceMonthsList().reduce((s, mo) => s + monthTotalHours(mo.key), 0);
+function yearTotalHours(startYear = selectedServiceYearStart){
+  return serviceMonthsList(startYear).reduce((s, mo) => s + monthTotalHours(mo.key), 0);
 }
 
 async function saveServicoState(){
@@ -1237,11 +1364,19 @@ function monthCardHTML(mo){
   for(let d = 1; d <= dim; d++){
     const rawVal = monthData.days[d];
     const val = (rawVal !== undefined && rawVal !== '') ? rawVal : '';
+    const weekday = new Date(mo.year, mo.monthIndex, d).getDay(); // 0=dom ... 6=sáb
+    const weekdayAbbr = DAYS[weekday].abbr;
+    const isWeekend = (weekday === 0 || weekday === 6);
     dayCells.push(`
-      <div class="day-hour-cell ${val !== '' ? 'has-value' : ''}">
+      <div class="day-hour-cell ${val !== '' ? 'has-value' : ''} ${isWeekend ? 'weekend' : ''}">
+        <span class="dweek">${weekdayAbbr}</span>
         <span class="dnum">${d}</span>
-        <input type="number" inputmode="decimal" min="0" max="24" step="0.5" value="${val}"
-          onchange="updateServiceDay('${key}', ${d}, this.value)">
+        <span class="input-wrap">
+          <input type="number" inputmode="decimal" min="0" max="24" step="0.5" value="${val}"
+            aria-label="Horas em ${weekdayAbbr}, dia ${d}"
+            onchange="updateServiceDay('${key}', ${d}, this.value)">
+          <span class="unit">h</span>
+        </span>
       </div>`);
   }
 
@@ -1270,10 +1405,26 @@ function monthCardHTML(mo){
 }
 
 function renderServico(){
+  const startYear = selectedServiceYearStart;
+  document.getElementById('serviceYearTotal').textContent = fmtDecHours(yearTotalHours(startYear));
+  document.getElementById('serviceYearLabel').innerHTML = `Set/${String(startYear).slice(-2)} – Ago/${String(startYear + 1).slice(-2)}`;
+  document.getElementById('monthsList').innerHTML = serviceMonthsList(startYear).map(monthCardHTML).join('');
+
+  const isCurrent = (startYear === currentServiceYearStart());
+  const currentBtn = document.getElementById('serviceYearCurrentBtn');
+  if(currentBtn){
+    currentBtn.textContent = isCurrent ? 'Ano atual' : 'Ir para o ano atual';
+  }
+
+  renderHomeServiceSummary();
+}
+
+function renderHomeServiceSummary(){
   const startYear = currentServiceYearStart();
-  document.getElementById('serviceYearTotal').textContent = fmtDecHours(yearTotalHours());
-  document.getElementById('serviceYearLabel').innerHTML = `Setembro ${startYear} – Agosto ${startYear + 1}`;
-  document.getElementById('monthsList').innerHTML = serviceMonthsList().map(monthCardHTML).join('');
+  const total = document.getElementById('homeServiceTotal');
+  const period = document.getElementById('homeServicePeriod');
+  if(total) total.textContent = fmtDecHours(yearTotalHours(startYear));
+  if(period) period.textContent = `Set/${String(startYear).slice(-2)} – Ago/${String(startYear + 1).slice(-2)}`;
 }
 
 function sendMonthReport(key){
