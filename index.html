@@ -64,6 +64,49 @@
     --shadow-teal:0 8px 20px -6px rgba(95,163,145,0.4);
     color-scheme:dark;
   }
+
+  /* ---- Padrões de cor (temas) ---- */
+  :root[data-color-theme="azul"]{
+    --gold:#C97A2B; --gold-soft:#F5E3CC; --gold-2:#E0954A;
+    --teal:#2C5F8A; --teal-2:#3F7BAE; --teal-soft:#E1EBF3;
+    --shadow-teal:0 8px 20px -6px rgba(44,95,138,0.35);
+  }
+  :root.dark[data-color-theme="azul"]{
+    --gold:#E8A85E; --gold-soft:#332510; --gold-2:#F0BC7C;
+    --teal:#6FA8D8; --teal-2:#8DBEE6; --teal-soft:#152430;
+    --shadow-teal:0 8px 20px -6px rgba(111,168,216,0.4);
+  }
+  :root[data-color-theme="roxo"]{
+    --gold:#C2678D; --gold-soft:#F6E0EA; --gold-2:#D687A6;
+    --teal:#6B4C93; --teal-2:#8566AD; --teal-soft:#EBE4F2;
+    --shadow-teal:0 8px 20px -6px rgba(107,76,147,0.35);
+  }
+  :root.dark[data-color-theme="roxo"]{
+    --gold:#E399B7; --gold-soft:#33202A; --gold-2:#EBB4CC;
+    --teal:#B39BD6; --teal-2:#C7B4E3; --teal-soft:#251C33;
+    --shadow-teal:0 8px 20px -6px rgba(179,155,214,0.4);
+  }
+  :root[data-color-theme="vinho"]{
+    --gold:#B87333; --gold-soft:#F3E1CC; --gold-2:#CB8D4E;
+    --teal:#7A3B4A; --teal-2:#96525F; --teal-soft:#F0E0E1;
+    --shadow-teal:0 8px 20px -6px rgba(122,59,74,0.35);
+  }
+  :root.dark[data-color-theme="vinho"]{
+    --gold:#DBA05E; --gold-soft:#33260F; --gold-2:#E5B57D;
+    --teal:#C97F8E; --teal-2:#D89AA6; --teal-soft:#2E1A1E;
+    --shadow-teal:0 8px 20px -6px rgba(201,127,142,0.4);
+  }
+  :root[data-color-theme="grafite"]{
+    --gold:#2A9D8F; --gold-soft:#DCF0EC; --gold-2:#3FB6A6;
+    --teal:#3D4C5B; --teal-2:#56697C; --teal-soft:#E5E9EC;
+    --shadow-teal:0 8px 20px -6px rgba(61,76,91,0.35);
+  }
+  :root.dark[data-color-theme="grafite"]{
+    --gold:#4FC4B4; --gold-soft:#0F2926; --gold-2:#6FD8C8;
+    --teal:#8FA3B5; --teal-2:#A9BAC8; --teal-soft:#1B242C;
+    --shadow-teal:0 8px 20px -6px rgba(143,163,181,0.4);
+  }
+
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;}
   html{ transition:background-color .25s ease; }
@@ -148,6 +191,54 @@
   .darkmode-btn .icon-moon{ display:none; }
   :root.dark .darkmode-btn .icon-sun{ display:none; }
   :root.dark .darkmode-btn .icon-moon{ display:block; }
+
+  .theme-btn{
+    background:linear-gradient(180deg,var(--card),var(--card-2));
+    border:1px solid var(--line);
+    border-radius:11px;
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--ink);
+    cursor:pointer;
+    padding:0;
+    flex-shrink:0;
+    box-shadow:var(--shadow-sm);
+    transition:transform .15s var(--ease), background .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .theme-btn svg{ width:19px; height:19px; }
+  .theme-btn:active{ background:var(--gold-soft); border-color:var(--gold); transform:scale(0.92); box-shadow:none; }
+
+  .theme-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .theme-opt{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    border-radius:13px;
+    border:1.5px solid var(--line);
+    background:var(--card-2);
+    cursor:pointer;
+    text-align:left;
+    transition:border-color .15s ease, transform .15s var(--ease);
+  }
+  .theme-opt.active{ border-color:var(--teal); box-shadow:0 0 0 2px var(--teal-soft); }
+  .theme-opt:active{ transform:scale(0.97); }
+  .theme-opt .swatch{
+    width:30px; height:30px; border-radius:50%; flex-shrink:0;
+    border:2px solid var(--card);
+    box-shadow:0 0 0 1px var(--line);
+  }
+  .theme-opt .swatch-label{ font-size:0.82rem; font-weight:600; color:var(--ink); line-height:1.25; }
+  .theme-opt .check{ margin-left:auto; width:16px; height:16px; color:var(--teal); flex-shrink:0; display:none; }
+  .theme-opt.active .check{ display:block; }
 
   /* Main scroll area */
   .app-content{
@@ -881,6 +972,37 @@
 
   .footer-note{ text-align:center; color:var(--ink-soft); font-size:0.75rem; padding:0 8px; }
 
+  .zoom-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:16px;
+    background:linear-gradient(165deg,var(--teal-2) 0%,var(--teal) 100%);
+    color:#fff;
+    border-radius:var(--radius);
+    text-decoration:none;
+    cursor:pointer;
+    box-shadow:var(--shadow-teal);
+    transition:transform .15s var(--ease), box-shadow .15s ease;
+  }
+  .zoom-card:active{ transform:scale(0.98); }
+  .zoom-card-icon{
+    width:44px; height:44px; border-radius:12px; flex-shrink:0;
+    background:rgba(255,255,255,0.18);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .zoom-card-icon svg{ width:22px; height:22px; }
+  .zoom-card-info{ min-width:0; flex:1; }
+  .zoom-card-title{ font-size:0.98rem; font-weight:700; }
+  .zoom-card-sub{ font-size:0.78rem; opacity:0.92; margin-top:2px; }
+  .zoom-card-meta{ font-size:0.75rem; opacity:0.88; margin-top:7px; font-family:'JetBrains Mono',monospace; letter-spacing:0.01em; }
+  .zoom-card-arrow{ width:18px; height:18px; opacity:0.85; flex-shrink:0; }
+  @media (hover:hover) and (pointer:fine){
+    .zoom-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+    .theme-opt:hover{ border-color:var(--teal); }
+    .theme-btn:hover{ background:var(--gold-soft); border-color:var(--gold); box-shadow:var(--shadow-sm); }
+  }
+
   .modal-overlay{
     position:fixed;
     inset:0;
@@ -968,6 +1090,9 @@
       <h1 id="topbarTitle">Programação do Pioneiro</h1>
       <p class="topbar-sub" id="topbarSub">Seu serviço, organizado</p>
     </div>
+    <button class="theme-btn" id="themeBtn" onclick="openThemeModal()" aria-label="Alterar padrão de cores" style="margin-left:auto;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    </button>
     <button class="darkmode-btn" id="darkModeBtn" onclick="toggleDarkMode()" aria-label="Alternar modo escuro">
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1015,6 +1140,16 @@
           Lançar horas do dia
         </button>
       </div>
+
+      <a class="zoom-card" href="https://us06web.zoom.us/j/83770330761" target="_blank" rel="noopener">
+        <span class="zoom-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M22 8.5 16 12l6 3.5v-7z"/></svg>
+        </span>
+        <span class="zoom-card-info">
+          <span class="zoom-card-title">Participar do Campo pelo Zoom</span>
+        </span>
+        <svg class="zoom-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
 
       <button class="install-btn" id="installBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M12 6v6l3 2"/></svg>
@@ -1132,6 +1267,40 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="themeModal">
+  <div class="modal-sheet">
+    <h2>Padrão de cores</h2>
+    <div class="theme-grid" id="themeGrid">
+      <button class="theme-opt" data-theme-id="verde" onclick="selectColorTheme('verde')">
+        <span class="swatch" style="background:linear-gradient(135deg,#3A6A5E,#B8862E);"></span>
+        <span class="swatch-label">Verde &amp; Dourado</span>
+        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </button>
+      <button class="theme-opt" data-theme-id="azul" onclick="selectColorTheme('azul')">
+        <span class="swatch" style="background:linear-gradient(135deg,#2C5F8A,#C97A2B);"></span>
+        <span class="swatch-label">Azul &amp; Âmbar</span>
+        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </button>
+      <button class="theme-opt" data-theme-id="roxo" onclick="selectColorTheme('roxo')">
+        <span class="swatch" style="background:linear-gradient(135deg,#6B4C93,#C2678D);"></span>
+        <span class="swatch-label">Roxo &amp; Rosé</span>
+        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </button>
+      <button class="theme-opt" data-theme-id="vinho" onclick="selectColorTheme('vinho')">
+        <span class="swatch" style="background:linear-gradient(135deg,#7A3B4A,#B87333);"></span>
+        <span class="swatch-label">Vinho &amp; Cobre</span>
+        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </button>
+      <button class="theme-opt" data-theme-id="grafite" onclick="selectColorTheme('grafite')">
+        <span class="swatch" style="background:linear-gradient(135deg,#3D4C5B,#2A9D8F);"></span>
+        <span class="swatch-label">Grafite &amp; Turquesa</span>
+        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </button>
+    </div>
+    <button class="modal-close" id="themeModalClose">Concluído</button>
+  </div>
+</div>
+
 <div class="saved-toast" id="savedToast">Salvo</div>
 
 <script>
@@ -1151,6 +1320,7 @@ const STORAGE_PROGRAMACAO = 'programacao-semanal';
 const STORAGE_PIONEER = 'pioneiro-nome';
 const STORAGE_SERVICO = 'servico-meses';
 const STORAGE_DARKMODE = 'pioneiro-modo-escuro';
+const STORAGE_COLORTHEME = 'pioneiro-tema-cor';
 
 let state = {};        // programação semanal { dom: [{id,start,end,mod}], ... }
 let openDay = null;
@@ -1200,6 +1370,30 @@ function loadDarkMode(){
     ? (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
     : saved === '1';
   applyDarkMode(on);
+}
+
+/* ---------------- Padrão de cores ---------------- */
+function applyColorTheme(id){
+  if(id && id !== 'verde'){
+    document.documentElement.setAttribute('data-color-theme', id);
+  }else{
+    document.documentElement.removeAttribute('data-color-theme');
+  }
+  document.querySelectorAll('.theme-opt').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.themeId === (id || 'verde'));
+  });
+}
+function loadColorTheme(){
+  let saved = 'verde';
+  try{ saved = localStorage.getItem(STORAGE_COLORTHEME) || 'verde'; }catch(e){}
+  applyColorTheme(saved);
+}
+function selectColorTheme(id){
+  applyColorTheme(id);
+  try{ localStorage.setItem(STORAGE_COLORTHEME, id); }catch(e){}
+}
+function openThemeModal(){
+  document.getElementById('themeModal').classList.add('show');
 }
 
 /* ---------------- Utilidades gerais ---------------- */
@@ -1852,6 +2046,13 @@ document.getElementById('installModal').addEventListener('click', (e) => {
   if(e.target.id === 'installModal') e.target.classList.remove('show');
 });
 
+document.getElementById('themeModalClose').addEventListener('click', () => {
+  document.getElementById('themeModal').classList.remove('show');
+});
+document.getElementById('themeModal').addEventListener('click', (e) => {
+  if(e.target.id === 'themeModal') e.target.classList.remove('show');
+});
+
 if(isStandalone()){
   document.getElementById('installBtn').style.display = 'none';
 }
@@ -1865,6 +2066,7 @@ if('serviceWorker' in navigator && (location.protocol === 'https:' || location.h
 /* ================= Init ================= */
 (async function init(){
   loadDarkMode();
+  loadColorTheme();
   await loadState();
   loadPioneerName();
   loadServicoState();
