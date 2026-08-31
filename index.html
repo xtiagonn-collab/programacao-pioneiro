@@ -282,7 +282,7 @@
     backdrop-filter:blur(14px) saturate(160%);
     -webkit-backdrop-filter:blur(14px) saturate(160%);
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(5,1fr);
     box-shadow:0 -6px 20px rgba(36,49,66,0.08);
   }
   :root.dark .tabbar{ background:rgba(26,33,44,0.92); }
@@ -299,8 +299,8 @@
     padding:6px 2px;
     position:relative;
   }
-  .tab-btn svg{ width:22px; height:22px; transition:transform .18s var(--ease); }
-  .tab-btn span{ font-size:0.68rem; font-weight:600; }
+  .tab-btn svg{ width:20px; height:20px; transition:transform .18s var(--ease); }
+  .tab-btn span{ font-size:0.62rem; font-weight:600; white-space:nowrap; }
   .tab-btn.active{ color:var(--teal); }
   .tab-btn.active svg{ transform:translateY(-1px) scale(1.05); }
   .tab-btn .tab-dot{
@@ -930,6 +930,108 @@
   .sw-btn:disabled{ opacity:.4; cursor:default; box-shadow:none; }
   .sw-hint{ margin-top:14px; font-size:0.78rem; color:var(--ink-soft); line-height:1.4; }
 
+  /* Designações */
+  .designacao-form{
+    background:linear-gradient(165deg,var(--card) 0%,var(--card-2) 100%);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    box-shadow:var(--shadow-sm);
+  }
+  .designacao-field label{ display:block; font-size:0.82rem; font-weight:600; color:var(--ink); margin-bottom:6px; }
+  .designacao-field input[type="date"],
+  .designacao-field input[type="text"],
+  .designacao-field select{
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:11px;
+    padding:12px 12px;
+    font-size:0.92rem;
+    font-weight:500;
+    background:var(--paper);
+    color:var(--ink);
+    box-shadow:inset 0 1px 2px rgba(36,49,66,0.05);
+    transition:border-color .15s ease, box-shadow .15s ease;
+    appearance:none;
+    -webkit-appearance:none;
+  }
+  .designacao-field select{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235c6a7d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+    background-size:16px;
+    padding-right:34px;
+  }
+  .designacao-field input:focus, .designacao-field select:focus{
+    outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(58,106,94,0.12);
+  }
+  .designacao-save-btn{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; padding:13px;
+    background:linear-gradient(165deg,var(--teal-2) 0%,var(--teal) 100%);
+    color:#fff; border:none; border-radius:11px;
+    font-size:0.92rem; font-weight:600; cursor:pointer;
+    box-shadow:var(--shadow-teal);
+    transition:transform .15s var(--ease), box-shadow .15s ease;
+  }
+  .designacao-save-btn:active{ transform:scale(0.98); box-shadow:var(--shadow-sm); }
+  .designacao-save-btn svg{ width:17px; height:17px; flex-shrink:0; }
+
+  .designacoes-list{ display:flex; flex-direction:column; gap:12px; margin-top:14px; }
+  .designacao-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:linear-gradient(165deg,var(--card) 0%,var(--card-2) 100%);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    box-shadow:var(--shadow-sm);
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .designacao-card.due{ border-color:var(--gold); box-shadow:0 0 0 1px var(--gold-soft), var(--shadow-sm); }
+  .designacao-card.past{ opacity:0.55; }
+  .designacao-date-chip{
+    flex-shrink:0;
+    width:52px; height:52px;
+    border-radius:12px;
+    background:var(--teal-soft);
+    color:var(--teal);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    line-height:1.05;
+  }
+  .designacao-date-chip .dd{ font-size:1.15rem; font-weight:800; font-family:'JetBrains Mono',monospace; }
+  .designacao-date-chip .mm{ font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; }
+  .designacao-info{ min-width:0; flex:1; }
+  .designacao-helper{ font-size:0.92rem; font-weight:700; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .designacao-weekday{ font-size:0.78rem; color:var(--ink-soft); margin-top:1px; }
+  .designacao-badges{ display:flex; flex-wrap:wrap; gap:6px; margin-top:7px; }
+  .designacao-badge{
+    display:inline-flex; align-items:center; gap:4px;
+    font-size:0.68rem; font-weight:700;
+    padding:3px 8px; border-radius:20px;
+    background:var(--teal-soft); color:var(--teal);
+  }
+  .designacao-badge.alert{ background:var(--gold-soft); color:var(--gold); }
+  .designacao-badge.past{ background:var(--paper); color:var(--ink-soft); }
+  .designacao-delete{
+    flex-shrink:0;
+    width:34px; height:34px;
+    border-radius:9px;
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--danger);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:transform .15s var(--ease), background .15s ease;
+  }
+  .designacao-delete:active{ transform:scale(0.92); background:var(--gold-soft); }
+  .designacao-delete svg{ width:16px; height:16px; }
+  .empty-designacoes{ padding:18px 0; text-align:center; color:var(--ink-soft); font-size:0.85rem; }
+
   .wa-btn{
     display:flex;
     align-items:center;
@@ -1230,6 +1332,40 @@
       </div>
     </section>
 
+    <!-- DESIGNAÇÕES -->
+    <section id="view-designacoes" class="view" hidden>
+      <div class="section-intro">
+        <h2>Designações</h2>
+        <p>Registre a data, o ajudante e escolha quando quer ser lembrado.</p>
+      </div>
+
+      <div class="designacao-form">
+        <div class="designacao-field">
+          <label for="designacaoDate">Data da designação</label>
+          <input type="date" id="designacaoDate">
+        </div>
+        <div class="designacao-field">
+          <label for="designacaoAjudante">Ajudante</label>
+          <input type="text" id="designacaoAjudante" placeholder="Nome do ajudante">
+        </div>
+        <div class="designacao-field">
+          <label for="designacaoLembrete">Lembrete</label>
+          <select id="designacaoLembrete">
+            <option value="0">Sem lembrete</option>
+            <option value="1">1 semana antes</option>
+            <option value="2">2 semanas antes</option>
+            <option value="3" selected>3 semanas antes</option>
+          </select>
+        </div>
+        <button class="designacao-save-btn" onclick="addDesignacao()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Salvar designação
+        </button>
+      </div>
+
+      <div class="designacoes-list" id="designacoesList"></div>
+    </section>
+
   </div>
 
   <div class="tabbar-wrap">
@@ -1253,6 +1389,11 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 3 5"/><path d="M19 3l2 2"/></svg>
         <span>Contagem</span>
         <span class="tab-dot"></span>
+      </button>
+      <button class="tab-btn" data-tab="designacoes" onclick="goTo('designacoes')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span>Designações</span>
+        <span class="tab-dot" id="designacoesTabDot"></span>
       </button>
     </nav>
   </div>
@@ -1321,6 +1462,7 @@ const STORAGE_PIONEER = 'pioneiro-nome';
 const STORAGE_SERVICO = 'servico-meses';
 const STORAGE_DARKMODE = 'pioneiro-modo-escuro';
 const STORAGE_COLORTHEME = 'pioneiro-tema-cor';
+const STORAGE_DESIGNACOES = 'pioneiro-designacoes';
 
 let state = {};        // programação semanal { dom: [{id,start,end,mod}], ... }
 let openDay = null;
@@ -1328,14 +1470,16 @@ let servicoState = {}; // { "2026-09": {days:{1:2.5,...}, estudos:3}, ... }
 let openMonth = null;
 let pioneerName = '';
 let currentTab = 'home';
+let designacoesState = []; // [{id, date:'YYYY-MM-DD', ajudante, lembreteSemanas, notifiedOn}]
 
 /* ---------------- Navegação por abas ---------------- */
-const TABS = ['home','programacao','servico','contagem'];
+const TABS = ['home','programacao','servico','contagem','designacoes'];
 const TAB_TITLES = {
   home:{title:'Programação do Pioneiro', sub:'Seu serviço, organizado'},
   programacao:{title:'Programação', sub:'Sua agenda semanal de serviço'},
   servico:{title:'Serviço', sub:'Horas e estudos do ano'},
-  contagem:{title:'Contagem', sub:'Cronômetro de campo'}
+  contagem:{title:'Contagem', sub:'Cronômetro de campo'},
+  designacoes:{title:'Designações', sub:'Compromissos e lembretes'}
 };
 
 function goTo(tab){
@@ -1394,6 +1538,175 @@ function selectColorTheme(id){
 }
 function openThemeModal(){
   document.getElementById('themeModal').classList.add('show');
+}
+
+/* ---------------- Designações ---------------- */
+function pad2(n){ return String(n).padStart(2,'0'); }
+
+function dateOnly(d){
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
+function todayDateOnly(){ return dateOnly(new Date()); }
+function parseDesignacaoDate(dateStr){
+  // dateStr = 'YYYY-MM-DD' vindo do <input type=date>, sem fuso
+  const [y,m,d] = dateStr.split('-').map(Number);
+  return new Date(y, m-1, d);
+}
+function daysBetween(a,b){
+  return Math.round((dateOnly(b) - dateOnly(a)) / 86400000);
+}
+
+async function loadDesignacoesState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_DESIGNACOES);
+    designacoesState = raw ? JSON.parse(raw) : [];
+  }catch(e){ designacoesState = []; }
+}
+async function saveDesignacoesState(){
+  try{
+    localStorage.setItem(STORAGE_DESIGNACOES, JSON.stringify(designacoesState));
+  }catch(e){}
+}
+
+function requestNotificationPermissionIfNeeded(){
+  if('Notification' in window && Notification.permission === 'default'){
+    Notification.requestPermission().catch(()=>{});
+  }
+}
+
+function addDesignacao(){
+  const dateEl = document.getElementById('designacaoDate');
+  const ajudanteEl = document.getElementById('designacaoAjudante');
+  const lembreteEl = document.getElementById('designacaoLembrete');
+  const dateVal = dateEl.value;
+  const ajudante = ajudanteEl.value.trim();
+  const lembrete = Number(lembreteEl.value);
+
+  if(!dateVal){
+    dateEl.focus();
+    return;
+  }
+
+  designacoesState.push({
+    id: uid(),
+    date: dateVal,
+    ajudante,
+    lembreteSemanas: lembrete,
+    notifiedOn: null
+  });
+  saveDesignacoesState();
+  renderDesignacoes();
+  showToast('Designação salva');
+
+  dateEl.value = '';
+  ajudanteEl.value = '';
+  lembreteEl.value = '3';
+
+  if(lembrete > 0) requestNotificationPermissionIfNeeded();
+}
+
+function deleteDesignacao(id){
+  designacoesState = designacoesState.filter(d => d.id !== id);
+  saveDesignacoesState();
+  renderDesignacoes();
+}
+
+const WEEKDAY_NAMES_PT = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+const MONTH_ABBR_PT = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+
+function renderDesignacoes(){
+  const list = document.getElementById('designacoesList');
+  if(!list) return;
+
+  const sorted = [...designacoesState].sort((a,b) => a.date.localeCompare(b.date));
+  const today = todayDateOnly();
+  let anyDue = false;
+
+  if(sorted.length === 0){
+    list.innerHTML = '<p class="empty-designacoes">Nenhuma designação registrada ainda.</p>';
+  }else{
+    list.innerHTML = sorted.map(d => {
+      const dDate = parseDesignacaoDate(d.date);
+      const diff = daysBetween(today, dDate);
+      const isPast = diff < 0;
+      const dueLimit = d.lembreteSemanas > 0 ? d.lembreteSemanas * 7 : null;
+      const isDue = !isPast && dueLimit !== null && diff <= dueLimit;
+      if(isDue) anyDue = true;
+
+      const weekday = WEEKDAY_NAMES_PT[dDate.getDay()];
+      const dayNum = pad2(dDate.getDate());
+      const monthAbbr = MONTH_ABBR_PT[dDate.getMonth()];
+
+      let countLabel;
+      if(isPast) countLabel = 'Já ocorreu';
+      else if(diff === 0) countLabel = 'É hoje';
+      else if(diff === 1) countLabel = 'Falta 1 dia';
+      else countLabel = `Faltam ${diff} dias`;
+
+      const lembreteLabel = d.lembreteSemanas > 0
+        ? `Lembrete: ${d.lembreteSemanas} semana${d.lembreteSemanas > 1 ? 's' : ''} antes`
+        : 'Sem lembrete';
+
+      const cardClass = isPast ? 'past' : (isDue ? 'due' : '');
+      const countBadgeClass = isPast ? 'past' : (isDue ? 'alert' : '');
+
+      return `
+        <div class="designacao-card ${cardClass}">
+          <div class="designacao-date-chip">
+            <span class="dd">${dayNum}</span>
+            <span class="mm">${monthAbbr}</span>
+          </div>
+          <div class="designacao-info">
+            <div class="designacao-helper">${d.ajudante ? escapeHtml(d.ajudante) : 'Sem ajudante definido'}</div>
+            <div class="designacao-weekday">${weekday}</div>
+            <div class="designacao-badges">
+              <span class="designacao-badge ${countBadgeClass}">${countLabel}</span>
+              <span class="designacao-badge">${lembreteLabel}</span>
+            </div>
+          </div>
+          <button class="designacao-delete" onclick="deleteDesignacao('${d.id}')" aria-label="Excluir designação">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+          </button>
+        </div>`;
+    }).join('');
+  }
+
+  const dot = document.getElementById('designacoesTabDot');
+  if(dot) dot.classList.toggle('show', anyDue);
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function checkDesignacaoReminders(){
+  if(!designacoesState.length) return;
+  const today = todayDateOnly();
+  const todayStr = `${today.getFullYear()}-${pad2(today.getMonth()+1)}-${pad2(today.getDate())}`;
+  let changed = false;
+  let dueCount = 0;
+
+  designacoesState.forEach(d => {
+    if(d.lembreteSemanas <= 0) return;
+    const dDate = parseDesignacaoDate(d.date);
+    const diff = daysBetween(today, dDate);
+    if(diff < 0) return;
+    const dueLimit = d.lembreteSemanas * 7;
+    if(diff <= dueLimit && d.notifiedOn !== todayStr){
+      dueCount++;
+      d.notifiedOn = todayStr;
+      changed = true;
+      if('Notification' in window && Notification.permission === 'granted'){
+        const body = `${d.ajudante ? d.ajudante + ' • ' : ''}${diff === 0 ? 'é hoje' : (diff === 1 ? 'falta 1 dia' : `faltam ${diff} dias`)}`;
+        try{ new Notification('Lembrete de designação', { body, tag: 'designacao-'+d.id }); }catch(e){}
+      }
+    }
+  });
+
+  if(changed) saveDesignacoesState();
+  if(dueCount > 0) showToast(dueCount === 1 ? 'Você tem uma designação se aproximando' : `Você tem ${dueCount} designações se aproximando`);
 }
 
 /* ---------------- Utilidades gerais ---------------- */
@@ -2070,9 +2383,13 @@ if('serviceWorker' in navigator && (location.protocol === 'https:' || location.h
   await loadState();
   loadPioneerName();
   loadServicoState();
+  await loadDesignacoesState();
   openDay = todayKey();
   render();
   renderServico();
+  renderDesignacoes();
+  checkDesignacaoReminders();
+  setInterval(checkDesignacaoReminders, 30 * 60 * 1000);
   goTo('home');
 })();
 </script>
